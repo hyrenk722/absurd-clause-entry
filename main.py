@@ -15,9 +15,9 @@ ENTRY = (
 )
 
 
-def check_gate(text):
+def validate(text):
     """Gate: /output/entry.txt must be UTF-8 text of 1 to 200 characters,
-    not only white space."""
+    not only white space, on a single line."""
     if not isinstance(text, str):
         return False
     if not text.strip():
@@ -27,6 +27,11 @@ def check_gate(text):
     if "\n" in text or "\r" in text:
         return False
     return True
+
+
+def check_gate(text):
+    """Single entry point for the gate; delegates to validate()."""
+    return validate(text)
 
 
 def main():
